@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +20,8 @@ import {
 } from "lucide-react";
 
 export default function GoalCraftHomepage() {
+  const { data: session } = useSession();
+
   const features = [
     {
       icon: Search,
@@ -81,25 +86,33 @@ export default function GoalCraftHomepage() {
               Trusted by students & developers preparing for top tech companies.
             </p>
 
-            {/* CTA */}
+            {/* 👋 Welcome Back */}
+            {session && (
+              <p className="mt-3 text-sm text-green-600">
+                Welcome back 👋 Continue your preparation
+              </p>
+            )}
+
+            {/* 🔥 CTA */}
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              
-              <Link href="/experiences">
+
+              <Link href={session ? "/experiences" : "/login"}>
                 <Button size="lg" className="w-full sm:w-auto">
-                  Explore <ArrowRight className="ml-2 h-4 w-4" />
+                  {session ? "Explore Experiences" : "Get Started"}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
 
-              <Link href="/experiences/create">
+              <Link href={session ? "/experiences/create" : "/signup"}>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Share Experience
+                  {session ? "Share Experience" : "Create Account"}
                 </Button>
               </Link>
 
             </div>
 
-            {/* STATS */}
-            <div className="mt-8 flex justify-center lg:justify-start gap-8 text-sm">
+            {/* 📊 STATS */}
+            {/* <div className="mt-8 flex justify-center lg:justify-start gap-8 text-sm">
               <div>
                 <p className="text-xl font-semibold">500+</p>
                 <p className="text-muted-foreground">Companies</p>
@@ -112,7 +125,7 @@ export default function GoalCraftHomepage() {
                 <p className="text-xl font-semibold">5k+</p>
                 <p className="text-muted-foreground">Users</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* RIGHT */}
@@ -127,7 +140,7 @@ export default function GoalCraftHomepage() {
               return (
                 <Card
                   key={i}
-                  className="hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  className="hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300"
                 >
                   <CardContent className="flex items-center gap-3 p-4">
                     <div className="p-2 rounded-lg bg-primary/10 text-primary">
@@ -161,7 +174,7 @@ export default function GoalCraftHomepage() {
             return (
               <Card
                 key={i}
-                className="hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300"
               >
                 <CardContent className="p-5">
                   <div className="mb-3 p-2 inline-flex rounded-lg bg-primary/10 text-primary">
@@ -194,10 +207,22 @@ export default function GoalCraftHomepage() {
               "Save & revise important posts",
               "Crack your interviews",
             ].map((step, i) => (
-              <div key={i} className="p-4 rounded-xl bg-white shadow-sm">
+              <div
+                key={i}
+                className="p-4 rounded-xl bg-background shadow-sm hover:shadow-md transition"
+              >
                 <p className="font-medium">{step}</p>
               </div>
             ))}
+          </div>
+
+          {/* 🔥 Bottom CTA */}
+          <div className="mt-10">
+            <Link href={session ? "/experiences" : "/signup"}>
+              <Button size="lg">
+                Start Your Preparation 🚀
+              </Button>
+            </Link>
           </div>
 
         </div>
