@@ -5,9 +5,6 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import AuthProvider from "./context/AuthProvider";
 import Navbar from "@/components/Navbar";
-
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/options";
 import Footer from "@/components/Footer";
 
 const geistSans = Geist({
@@ -20,33 +17,85 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// 🔥 IMPORTANT: change this when you buy domain
+const baseUrl = "https://goalcraft-1.vercel.app";
+
 export const metadata: Metadata = {
-  title: "GoalCraft",
+  metadataBase: new URL(baseUrl),
+
+  title: {
+    default: "GoalCraft",
+    template: "%s | GoalCraft",
+  },
+
   description: "Share and explore real interview experiences",
+
+  // 🔥 ICONS
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
+  // 🔥 OPEN GRAPH (WHATSAPP / LINKEDIN)
+  openGraph: {
+    title: "GoalCraft",
+    description: "Share and explore real interview experiences",
+    url: baseUrl,
+    siteName: "GoalCraft",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "GoalCraft Preview",
+      },
+    ],
+    type: "website",
+  },
+
+  // 🔥 TWITTER
+  twitter: {
+    card: "summary_large_image",
+    title: "GoalCraft",
+    description: "Share and explore real interview experiences",
+    images: ["/og-image.png"],
+  },
+
+  // 🔥 SEO BONUS
+  keywords: [
+    "interview experiences",
+    "placement preparation",
+    "DSA interview",
+    "coding interview",
+    "SDE preparation",
+  ],
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  
-
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Navbar  />
+          {/* NAVBAR */}
+          <Navbar />
 
-          <main>
+          {/* MAIN CONTENT */}
+          <main className="min-h-screen">
             {children}
           </main>
 
-          <Footer/>
+          {/* FOOTER */}
+          <Footer />
 
-          <Toaster />
+          {/* TOAST */}
+          <Toaster richColors position="top-right" />
         </AuthProvider>
       </body>
     </html>

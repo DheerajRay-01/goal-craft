@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -57,35 +58,48 @@ export default function GoalCraftHomepage() {
         <div className="max-w-6xl mx-auto px-4 py-20 grid lg:grid-cols-2 gap-12 items-center">
 
           {/* LEFT */}
-          <div>
+          <div className="text-center lg:text-left">
+
             <Badge className="mb-4 bg-primary/10 text-primary">
               <Sparkles className="mr-2 h-4 w-4" />
               Real Experiences. Real Preparation.
             </Badge>
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              Learn From
-              <span className="text-primary"> Real Interview Experiences</span>
+              Crack Interviews with
+              <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+                {" "}Real Experiences
+              </span>
             </h1>
 
             <p className="mt-4 text-muted-foreground text-lg">
               Discover real interview journeys, questions, and preparation strategies
-              shared by candidates.
+              shared by candidates from top companies.
+            </p>
+
+            <p className="mt-2 text-sm text-muted-foreground">
+              Trusted by students & developers preparing for top tech companies.
             </p>
 
             {/* CTA */}
-            <div className="mt-6 flex gap-4">
-              <Button size="lg" className="bg-primary hover:bg-accent">
-                Explore <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+            <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              
+              <Link href="/experiences">
+                <Button size="lg" className="w-full sm:w-auto">
+                  Explore <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
 
-              <Button size="lg" variant="outline">
-                Share Experience
-              </Button>
+              <Link href="/experiences/create">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                  Share Experience
+                </Button>
+              </Link>
+
             </div>
 
             {/* STATS */}
-            <div className="mt-8 flex gap-8 text-sm">
+            <div className="mt-8 flex justify-center lg:justify-start gap-8 text-sm">
               <div>
                 <p className="text-xl font-semibold">500+</p>
                 <p className="text-muted-foreground">Companies</p>
@@ -101,7 +115,7 @@ export default function GoalCraftHomepage() {
             </div>
           </div>
 
-          {/* RIGHT (Clean Feature Cards) */}
+          {/* RIGHT */}
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               { icon: Building2, label: "Company Specific" },
@@ -111,7 +125,10 @@ export default function GoalCraftHomepage() {
             ].map((item, i) => {
               const Icon = item.icon;
               return (
-                <Card key={i} className="hover:shadow-lg transition">
+                <Card
+                  key={i}
+                  className="hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                >
                   <CardContent className="flex items-center gap-3 p-4">
                     <div className="p-2 rounded-lg bg-primary/10 text-primary">
                       <Icon className="h-5 w-5" />
@@ -142,7 +159,10 @@ export default function GoalCraftHomepage() {
           {features.map((feature, i) => {
             const Icon = feature.icon;
             return (
-              <Card key={i} className="hover:shadow-lg transition">
+              <Card
+                key={i}
+                className="hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
                 <CardContent className="p-5">
                   <div className="mb-3 p-2 inline-flex rounded-lg bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
@@ -157,6 +177,30 @@ export default function GoalCraftHomepage() {
           })}
         </div>
 
+      </section>
+
+      {/* 🔥 HOW IT WORKS */}
+      <section className="border-t py-20 bg-muted/30">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+
+          <h2 className="text-3xl font-semibold mb-10">
+            How it works
+          </h2>
+
+          <div className="grid md:grid-cols-4 gap-6 text-sm">
+            {[
+              "Explore real experiences",
+              "Understand interview patterns",
+              "Save & revise important posts",
+              "Crack your interviews",
+            ].map((step, i) => (
+              <div key={i} className="p-4 rounded-xl bg-white shadow-sm">
+                <p className="font-medium">{step}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
 
     </main>
