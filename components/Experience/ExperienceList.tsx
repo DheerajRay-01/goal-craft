@@ -2,6 +2,14 @@ import ExperienceCard from "./ExperienceCard";
 import PaginationComponent from "../PaginationComponent";
 import SortDropdown from "../filters/sortOptions";
 import Filter from "../filters/Filter";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { Button } from "@/components/ui/button";
+import { SlidersHorizontal } from "lucide-react";
 
 interface Props {
   cards: any[];
@@ -68,14 +76,6 @@ const ExperienceList = ({
               {/* <SortDropdown basePath="/me/posts" /> */}
             </div>
 
-            {/* MOBILE FILTER */}
-            {showFilters && (
-              <div className="lg:hidden">
-                <div className="rounded-xl border border-[#dbeafe] p-4 bg-white shadow-soft">
-                  <Filter filterOptions={filterOptions || EMPTY_FILTER_OPTIONS} />
-                </div>
-              </div>
-            )}
 
             {/* EMPTY */}
             {cards.length === 0 ? (
@@ -112,6 +112,35 @@ const ExperienceList = ({
           </div>
         </div>
       </div>
+      {/* 🔥 MOBILE FILTER POPUP */}
+{showFilters && (
+  <div className="fixed bottom-5 right-5 z-50 lg:hidden">
+
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="rounded-full shadow-lg px-4">
+          <SlidersHorizontal className="h-4 w-4 mr-2" />
+          Filters
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="max-h-[85vh] p-0 overflow-hidden">
+
+        {/* HEADER */}
+        <div className="p-4 border-b font-semibold">
+          Filters
+        </div>
+
+        {/* SCROLLABLE */}
+        <div className="overflow-y-auto p-4 max-h-[70vh]">
+          <Filter filterOptions={filterOptions || EMPTY_FILTER_OPTIONS} />
+        </div>
+
+      </DialogContent>
+    </Dialog>
+
+  </div>
+)}
     </section>
   );
 };

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -13,14 +14,19 @@ export default function Footer() {
 
           {/* BRAND */}
           <div>
-            <div className="flex items-center gap-2">
-              <div className="h-9 w-9 rounded-xl bg-primary text-white flex items-center justify-center font-bold">
-                G
-              </div>
-              <h2 className="text-lg font-semibold tracking-tight">
-                GoalCraft
-              </h2>
-            </div>
+        <Link href="/" className="flex items-center gap-2">
+  <Image
+    src="/logo.png" // 🔥 your public logo
+    alt="GoalCraft"
+    width={36}
+    height={36}
+    className="rounded-lg"
+    priority
+  />
+  <span className="text-lg font-semibold tracking-tight">
+    GoalCraft
+  </span>
+</Link>
 
             <p className="text-sm text-muted-foreground mt-3 max-w-sm leading-relaxed">
               Share real interview experiences, explore insights, and prepare

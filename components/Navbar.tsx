@@ -18,6 +18,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+import Image from "next/image";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -29,14 +30,19 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
 
         {/* 🔥 Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white font-bold shadow-sm">
-            G
-          </div>
-          <span className="text-lg font-semibold tracking-tight">
-            GoalCraft
-          </span>
-        </Link>
+      <Link href="/" className="flex items-center gap-2">
+  <Image
+    src="/logo.png" // 🔥 your public logo
+    alt="GoalCraft"
+    width={36}
+    height={36}
+    className="rounded-lg"
+    priority
+  />
+  <span className="text-lg font-semibold tracking-tight">
+    GoalCraft
+  </span>
+</Link>
 
         {/* 🔥 Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm">

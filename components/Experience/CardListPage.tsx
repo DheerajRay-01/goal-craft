@@ -6,6 +6,17 @@ import Filter from "../filters/Filter";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
+// 🔥 shadcn
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { SlidersHorizontal } from "lucide-react";
+
 interface Props {
   cards: any[];
   page: number;
@@ -38,7 +49,7 @@ const CardListPage = async ({
 
         <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
 
-          {/* 🔥 SIDEBAR */}
+          {/* 🔥 DESKTOP SIDEBAR */}
           <aside className="hidden lg:block sticky top-20 h-fit">
             <div className="rounded-2xl border border-[#dbeafe] bg-white p-5 shadow-soft">
               <Filter filterOptions={filterOptions || EMPTY_FILTER_OPTIONS} />
@@ -48,7 +59,7 @@ const CardListPage = async ({
           {/* 🔥 MAIN */}
           <div className="space-y-6">
 
-            {/* 🔥 HEADER (UPGRADED) */}
+            {/* 🔥 HEADER */}
             <div className="rounded-2xl border border-[#dbeafe] bg-white px-5 py-4 shadow-soft flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
               <div>
@@ -66,13 +77,6 @@ const CardListPage = async ({
               </div>
 
               <SortDropdown basePath="/experiences" />
-            </div>
-
-            {/* 🔥 MOBILE FILTER */}
-            <div className="lg:hidden">
-              <div className="rounded-xl border border-[#dbeafe] p-4 bg-white shadow-soft">
-                <Filter filterOptions={filterOptions || EMPTY_FILTER_OPTIONS} />
-              </div>
             </div>
 
             {/* 🔥 EMPTY STATE */}
@@ -110,6 +114,34 @@ const CardListPage = async ({
           </div>
         </div>
       </div>
+
+      {/* 🔥 MOBILE FLOATING FILTER */}
+     <div className="fixed bottom-5 right-5 z-50 lg:hidden">
+  <Dialog>
+    
+    <DialogTrigger asChild>
+      <Button className="rounded-full shadow-lg px-4">
+        <SlidersHorizontal className="h-4 w-4 mr-2" />
+        Filters
+      </Button>
+    </DialogTrigger>
+
+    <DialogContent className="max-h-[85vh] p-0 overflow-hidden">
+
+      {/* HEADER */}
+      <DialogHeader className="p-4 border-b">
+        <DialogTitle>Filters</DialogTitle>
+      </DialogHeader>
+
+      {/* SCROLLABLE CONTENT */}
+      <div className="overflow-y-auto p-4 max-h-[70vh]">
+        <Filter filterOptions={filterOptions || EMPTY_FILTER_OPTIONS} />
+      </div>
+
+    </DialogContent>
+
+  </Dialog>
+</div>
     </section>
   );
 };
