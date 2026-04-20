@@ -13,30 +13,22 @@ export async function GET(
   context: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await context.params;
-  try {
+try {
     await connectDB();
 
     const experience = await experienceModel
       .findOne({ slug })
-      .populate("user", "name image")
+      .populate("user", "_id fullName username")
       .lean();
 
     if (!experience) {
       return apiResponse(false, "Experience not found", 404);
     }
 
-    console.log(experience);
-    
+    return apiResponse(true, "Fetched successfully", 200, experience);
 
-    return apiResponse(
-      true,
-      "Experience fetched successfully",
-      200,
-      experience,
-    );
   } catch (error) {
     console.error(error);
-
     return apiResponse(false, "Internal server error", 500);
   }
 }

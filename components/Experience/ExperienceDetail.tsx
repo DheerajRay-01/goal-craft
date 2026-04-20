@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 import {
   MapPin,
@@ -43,21 +44,38 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
           </div>
 
           {/* META */}
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm text-muted-foreground">
 
-            <div className="flex items-center gap-1">
-              <MapPin size={12} />
-              <span className="truncate max-w-[120px] sm:max-w-none">
-                {post.location}
-              </span>
-            </div>
 
-            <div className="flex items-center gap-1">
-              <Calendar size={12} />
-              {formatDate(post.interviewDate)}
-            </div>
+<div className="flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm text-muted-foreground">
 
-          </div>
+  {/* LOCATION */}
+  <div className="flex items-center gap-1">
+    <MapPin size={12} />
+    <span className="truncate max-w-[120px] sm:max-w-none">
+      {post.location}
+    </span>
+  </div>
+
+  {/* DATE */}
+  <div className="flex items-center gap-1">
+    <Calendar size={12} />
+    {formatDate(post.interviewDate)}
+  </div>
+
+  {/* 🔥 USERNAME */}
+  {post.user?.username && (
+    <Link
+      href={`/u/${post.user.username}`}
+      className="flex items-center gap-1 hover:text-primary transition"
+    >
+      <User size={12} />
+      <span className="font-medium text-primary underline">
+        @{post.user.username}
+      </span>
+    </Link>
+  )}
+
+</div>
 
           {/* BADGES */}
           <div className="flex flex-wrap gap-2">
