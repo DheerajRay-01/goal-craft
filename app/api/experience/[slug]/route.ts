@@ -4,18 +4,20 @@ import { apiResponse } from "@/lib/apiResponse";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { NextRequest } from "next/server";
 
 /* GET SINGLE EXPERIENCE */
 
 export async function GET(
-  req: Request,
-  { params }: { params: { slug: string } },
+  req: NextRequest,
+  context: { params: Promise<{ slug: string }> }
 ) {
+  const { slug } = await context.params;
   try {
     await connectDB();
 
     const experience = await experienceModel
-      .findOne({ slug: params.slug })
+      .findOne({ slug })
       .populate("user", "name image")
       .lean();
 
