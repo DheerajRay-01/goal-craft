@@ -48,7 +48,7 @@ const DeleteAndEditBtn = ({ slug }: { slug: string }) => {
     <div className="flex items-center gap-2">
 
       {/* Edit */}
-      <Button
+      {/* <Button
         size="sm"
         variant="outline"
         onClick={() => router.push(`/experience/${slug}/edit`)}
@@ -56,7 +56,7 @@ const DeleteAndEditBtn = ({ slug }: { slug: string }) => {
       >
         <Pencil size={14} className="mr-2" />
         Edit
-      </Button>
+      </Button> */}
 
       {/* Delete */}
       <AlertDialog>

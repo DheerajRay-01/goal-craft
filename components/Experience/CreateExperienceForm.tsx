@@ -169,14 +169,14 @@ export default function CreateExperienceForm({
     }
   }
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 space-y-10">
+    <div className="mx-auto max-w-6xl px-3 sm:px-4 py-6 sm:py-8 space-y-8 sm:space-y-10">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-semibold tracking-tight">
+         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
             Share Interview Experience
           </h1>
-          <p className="text-base text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             Help others prepare by sharing your real interview journey.
           </p>
         </div>
@@ -189,21 +189,21 @@ export default function CreateExperienceForm({
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <CardContent className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Input
-              className="h-11 rounded-xl"
+              className="h-12 sm:h-11 rounded-xl text-base sm:text-sm px-4"
               placeholder="Company Name"
               {...register("companyName", { required: true })}
             />
 
             <Input
-              className="h-11 rounded-xl"
+             className="h-12 sm:h-11 rounded-xl text-base sm:text-sm px-4"
               placeholder="Role"
               {...register("role", { required: true })}
             />
 
             <Input
-              className="h-11 rounded-xl"
+            className="h-12 sm:h-11 rounded-xl text-base sm:text-sm px-4"
               placeholder="Location"
               {...register("location")}
             />
@@ -245,7 +245,7 @@ export default function CreateExperienceForm({
             />
 
             <Input
-              className="h-11 rounded-xl"
+           className="h-12 sm:h-11 rounded-xl text-base sm:text-sm px-4"
               type="date"
               {...register("interviewDate")}
             />
@@ -272,7 +272,7 @@ export default function CreateExperienceForm({
             {skillsField.fields.map((field, index) => (
               <div key={field.id} className="flex gap-3">
                 <Input
-                  className="h-11 rounded-xl"
+               className="h-12 sm:h-11 rounded-xl text-base sm:text-sm px-4"
                   placeholder="DSA, React, System Design..."
                   {...register(`skills.${index}.value`)}
                 />
@@ -315,16 +315,16 @@ export default function CreateExperienceForm({
             {roundsField.fields.map((field, index) => (
               <div
                 key={field.id}
-                className="rounded-2xl border bg-muted/30 p-5 space-y-4"
+              className="rounded-xl sm:rounded-2xl border bg-muted/30 p-4 sm:p-5 space-y-3 sm:space-y-4"
               >
                 <Input
-                  className="h-11 rounded-xl"
+               className="h-12 sm:h-11 rounded-xl text-base sm:text-sm px-4"
                   placeholder="Round Title"
                   {...register(`rounds.${index}.title`)}
                 />
 
                 <Textarea
-                  className="min-h-[120px] rounded-2xl"
+                className="min-h-[140px] sm:min-h-[120px] rounded-2xl text-base sm:text-sm px-4 py-3"
                   placeholder="Describe this round..."
                   {...register(`rounds.${index}.description`)}
                 />
@@ -352,7 +352,7 @@ export default function CreateExperienceForm({
 
           <CardContent>
             <Textarea
-              className="min-h-[180px] rounded-2xl"
+              className="min-h-[140px] sm:min-h-[120px] rounded-2xl text-base sm:text-sm px-4 py-3"
               placeholder="Describe your full interview experience..."
               {...register("overallExperience", { required: true })}
             />
@@ -379,12 +379,12 @@ export default function CreateExperienceForm({
             {questionField.fields.map((field, index) => (
               <div
                 key={field.id}
-                className="flex gap-3 rounded-2xl border bg-muted/30 p-4"
+               className="flex flex-col sm:flex-row gap-2 sm:gap-3 rounded-2xl border bg-muted/30 p-3 sm:p-4"
               >
                 <span className="mt-2 text-sm font-semibold">Q{index + 1}</span>
 
                 <Textarea
-                  className="flex-1 rounded-2xl"
+               className="min-h-[140px] sm:min-h-[120px] rounded-2xl text-base sm:text-sm px-4 py-3"
                   placeholder="Describe the interview question..."
                   {...register(`questions.${index}.value`)}
                 />
@@ -409,7 +409,7 @@ export default function CreateExperienceForm({
           </CardHeader>
 
           <CardContent>
-            <div className="rounded-2xl border-2 border-dashed p-8 text-center space-y-4">
+            <div className="rounded-xl sm:rounded-2xl border-2 border-dashed p-5 sm:p-8 text-center space-y-3 sm:space-y-4">
               <Upload className="mx-auto text-muted-foreground" size={24} />
 
               <p className="text-sm">Upload interview resources</p>
@@ -440,7 +440,7 @@ export default function CreateExperienceForm({
               {form.watch("resources")?.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between rounded-xl border px-4 py-2"
+                 className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 rounded-xl border px-3 sm:px-4 py-2"
                 >
                   <span className="text-sm truncate">{file.fileName}</span>
 
@@ -466,12 +466,12 @@ export default function CreateExperienceForm({
         </Card>
 
         {/* Actions */}
-        <div className="sticky bottom-4 flex justify-end gap-3 rounded-2xl border bg-card/90 p-4 backdrop-blur">
-          <Button type="button" variant="outline" onClick={saveDraft}>
+        <div className="sticky bottom-2 sm:bottom-4 flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end rounded-xl sm:rounded-2xl border bg-card/90 p-3 sm:p-4 backdrop-blur">
+          <Button type="button" variant="outline" className="w-full sm:w-auto" onClick={saveDraft}>
             Save Draft
           </Button>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
             {edit
               ? isSubmitting
                 ? "Saving changes..."
