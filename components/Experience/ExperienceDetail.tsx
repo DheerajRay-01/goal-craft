@@ -32,38 +32,38 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
   
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 lg:px-6 lg:py-10 space-y-8">
+    <div className="mx-auto max-w-7xl px-3 sm:px-4 py-6 sm:py-8 lg:px-6 lg:py-10 space-y-6 sm:space-y-8">
 
       {/* 🔥 HERO HEADER */}
-      <div className="rounded-3xl border border-[#dbeafe] bg-gradient-to-b from-white to-[#f0f9ff] p-8 shadow-soft flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+      <div className="rounded-3xl border border-[#dbeafe] bg-gradient-to-b from-white to-[#f0f9ff] p-4 sm:p-6 lg:p-8 shadow-soft flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
 
         <div className="space-y-4">
           <div>
-            <h1 className="text-3xl lg:text-4xl font-bold text-foreground">
+            <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold">
               {post.companyName}
             </h1>
 
-            <p className="mt-2 text-base font-medium text-primary">
+            <p className="mt-1 sm:mt-2 text-sm sm:text-base font-medium text-primary">
               {post.role}
             </p>
           </div>
 
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
               <MapPin size={14} />
               {post.location}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
               <Calendar size={14} />
               {formatDate(post.interviewDate)}
             </div>
 
-            <div className="flex items-center gap-2">
-              <User size={14} />
-              <span className="text-primary font-medium">
+            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
+              {/* <User size={14} /> */}
+              {/* <span className="text-primary font-medium">
                 @{post.user?.username}
-              </span>
+              </span> */}
             </div>
           </div>
 
@@ -74,7 +74,7 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
         </div>
 
         {/* 🔥 ACTIONS */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <HelpfulButton
             experienceId={post._id}
             helpFullUsers={post.helpfulUsers}
@@ -89,7 +89,7 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
       </div>
 
       {/* 🔥 STATS */}
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {[
           ["Interview Rounds", post.rounds?.length],
           ["Skills Covered", post.skills?.length],
@@ -98,12 +98,12 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
         ].map(([label, value]) => (
           <div
             key={label}
-            className="rounded-xl border border-[#dbeafe] bg-white p-5 text-center shadow-soft"
+          className="rounded-xl border p-3 sm:p-5 text-center"
           >
             <p className="text-xs uppercase text-muted-foreground">
               {label}
             </p>
-            <p className="mt-2 text-2xl font-bold text-primary">
+            <p className="mt-2 text-lg sm:text-2xl font-bold text-primary">
               {value}
             </p>
           </div>
@@ -111,7 +111,7 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
       </div>
 
       {/* 🔥 MAIN GRID */}
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
 
         {/* LEFT */}
         <div className="space-y-6 lg:col-span-2">
@@ -135,14 +135,14 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
             </CardHeader>
             <CardContent className="space-y-6">
               {post.rounds?.map((round: any, i: number) => (
-                <div key={i} className="flex gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] text-primary font-medium">
+                <div key={i} className="flex gap-3 sm:gap-4">
+                  <div className="flex h-7 w-7 sm:h-9 sm:w-9 text-xs sm:text-base shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] text-primary font-medium">
                     {i + 1}
                   </div>
 
                   <div>
-                    <p className="font-medium">{round.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
+                    <p className="text-sm sm:text-base font-medium">{round.title}</p>
+                    <p className="mt-1 text-xs sm:text-sm">
                       {round.description}
                     </p>
                   </div>
@@ -156,7 +156,7 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
               <CardTitle>Experience Description</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm leading-7 text-muted-foreground whitespace-pre-line">
+              <p className="text-xs sm:text-sm leading-6 sm:leading-7">
                 {post.overallExperience}
               </p>
             </CardContent>
@@ -170,12 +170,12 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
               {post.questions?.map((q: string, i: number) => (
                 <div
                   key={i}
-                  className="flex gap-3 rounded-lg bg-[#f0f9ff] border border-[#e0f2fe] px-3 py-2"
+                  className="flex gap-2 sm:gap-3 px-3 py-2"
                 >
                   <span className="font-semibold text-primary">
                     Q{i + 1}.
                   </span>
-                  <p className="text-sm">{q}</p>
+                  <p className="text-xs sm:text-sm">{q}</p>
                 </div>
               ))}
             </CardContent>
@@ -183,7 +183,7 @@ export default async function ExperienceDetail({ post, isOwner }: any) {
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="space-y-6 lg:sticky lg:top-24 h-fit">
+        <div className="space-y-4 sm:space-y-6 lg:sticky lg:top-24 h-fit">
 
           <Card className="rounded-2xl border border-[#dbeafe] bg-white shadow-soft">
             <CardHeader>
